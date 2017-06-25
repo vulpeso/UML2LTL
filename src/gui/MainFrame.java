@@ -7,6 +7,7 @@ import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.io.File;
+import java.io.FileReader;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -26,17 +27,20 @@ import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
 
-import com.mxgraph.swing.mxGraphComponent;
-import com.mxgraph.view.mxGraph;
 
 
 public class MainFrame extends JFrame {
 	
 	private static final long serialVersionUID = -2707712944901661771L;
+
+	JFileChooser fc;
 	
 	public JToolBar toolbar;
-	public mxGraphComponent graphPane;
+	//UML input
+	public ScrollableTextArea modelUML;
+	//LTL input
 	public ScrollableTextArea requirements;
+	//logic generator output
 	public ScrollableTextArea logicSpec;
 	public U2TDebugPanel debugPane;
 	public U2TStatusBar statusBar;
@@ -44,17 +48,18 @@ public class MainFrame extends JFrame {
 	public MainFrame(){
 		ImageIcon webIcon = new ImageIcon("img/icon.png");
         setIconImage(webIcon.getImage());
-        
+
+		fc = new JFileChooser();
         setJMenuBar(new U2TMenuBar(this));
 		
 		toolbar = new U2TToolBar(this);
-		graphPane = new U2TModeler(this);		
-		requirements = new ScrollableTextArea();
-		logicSpec = new ScrollableTextArea();
+		modelUML = new ScrollableTextArea("UML model in XML format");		
+		requirements = new ScrollableTextArea("LTL rules definition");
+		logicSpec = new ScrollableTextArea("Logic specification generator output");
 		debugPane = new U2TDebugPanel(this);
 		statusBar = new U2TStatusBar();
 		
-		createLayout(toolbar, graphPane, requirements, logicSpec, debugPane, statusBar);
+		createLayout(toolbar, modelUML, requirements, logicSpec, debugPane, statusBar);
 		
 		setTitle("UML2LTL");
         setSize(1000, 600);
@@ -62,15 +67,14 @@ public class MainFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 	
-	
     private void createLayout(JComponent... arg) {
         JPanel pane3 = new JPanel();
         pane3.setLayout(new BorderLayout());
-		pane3.add(arg[1], BorderLayout.CENTER);
-		pane3.add(arg[2], BorderLayout.SOUTH);
+		pane3.add(arg[1], BorderLayout.NORTH);
+		pane3.add(arg[2], BorderLayout.CENTER);
 		
-		arg[2].setPreferredSize(new Dimension(arg[2].getWidth(), 100));
-		arg[3].setPreferredSize(new Dimension(300, arg[2].getHeight()));
+		arg[1].setPreferredSize(new Dimension(arg[2].getWidth(), 200));
+		arg[3].setPreferredSize(new Dimension(500, arg[2].getHeight()));
 		
 		JPanel pane4 = new JPanel();
         pane4.setLayout(new BorderLayout());
@@ -92,6 +96,44 @@ public class MainFrame extends JFrame {
         pane.add(pane2, BorderLayout.SOUTH);
     }
 	
+    public void importLTL(ActionEvent e) {
+        {
+            int returnVal = fc.showOpenDialog(this);
+ 
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                debugPane.debugLog("import requirements from file: " + file.getName()+"\n");
+                loadLTL(file);
+            } else {
+            	debugPane.debugLog("Open command cancelled by user.\n");
+            }
+            //log.setCaretPosition(log.getDocument().getLength());
+        }
+    }
+    public void importUML(ActionEvent e) {
+        {
+            int returnVal = fc.showOpenDialog(this);
+ 
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                File file = fc.getSelectedFile();
+                debugPane.debugLog("import UML model from file: " + file.getName()+"\n");
+                loadUML(file);
+            } else {
+            	debugPane.debugLog("Open command cancelled by user.\n");
+            }
+            //log.setCaretPosition(log.getDocument().getLength());
+        }
+    }	
+	private void loadLTL(File file){
+		try (FileReader reader = new FileReader(file)) {
+		    requirements.getTextArea().read(reader, null);
+		}catch(Exception e){};
+	}
+	private void loadUML(File file){
+		try (FileReader reader = new FileReader(file)) {
+		    modelUML.getTextArea().read(reader, null);
+		}catch(Exception e){};
+	}
 	public static void main(String [ ] args){
 		EventQueue.invokeLater(() -> {
 			MainFrame app = new MainFrame();

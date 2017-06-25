@@ -32,10 +32,10 @@ public class U2TDebugPanel extends JTabbedPane {
 		cAnalysis = new JPanel(new BorderLayout());
 		cDebugging = new JPanel(new BorderLayout());
 		
-		tReasoning = new ScrollableTextArea();
-		tReporting = new ScrollableTextArea();
-		tAnalysis = new ScrollableTextArea();
-		tDebugging = new ScrollableTextArea();
+		tReasoning = new ScrollableTextArea("");
+		tReporting = new ScrollableTextArea("");
+		tAnalysis = new ScrollableTextArea("");
+		tDebugging = new ScrollableTextArea("");
 		
 		cReasoning.add(tReasoning);
 		cReporting.add(tReporting);

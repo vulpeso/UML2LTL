@@ -13,12 +13,10 @@ import javax.swing.JToolBar;
 
 public class U2TToolBar extends JToolBar {
 	MainFrame parent;
-	JFileChooser fc;
 	
 	public U2TToolBar(MainFrame parent) {
 		this.parent = parent;
 
-		fc = new JFileChooser();
 
         ImageIcon iconNew = new ImageIcon("img/png/New document.png");
         ImageIcon iconOpen = new ImageIcon("img/png/Folder.png");
@@ -28,7 +26,7 @@ public class U2TToolBar extends JToolBar {
         JButton newb = new JButton(iconNew);
         JButton openb = new JButton(iconOpen);
         openb.addActionListener((ActionEvent event) -> {
-            openFileChooser(event);
+            parent.importUML(event);
         });
         JButton saveb = new JButton(iconSave);
         JButton gob = new JButton(iconGo);
@@ -41,26 +39,5 @@ public class U2TToolBar extends JToolBar {
         add(Box.createHorizontalGlue());
     }
 	
-	public void openFileChooser(ActionEvent e) {
-        {
-            int returnVal = fc.showOpenDialog(parent);
- 
-            if (returnVal == JFileChooser.APPROVE_OPTION) {
-                File file = fc.getSelectedFile();
-                parent.debugPane.debugLog("import requirements from file: " + file.getName());
-                loadReq(file);
-            } else {
-                //log.append("Open command cancelled by user." + newline);
-            }
-            //log.setCaretPosition(log.getDocument().getLength());
- 
-        //Handle save button action.
-        }
-    }
 	
-	public void loadReq(File file){
-		try (FileReader reader = new FileReader(file)) {
-		    parent.requirements.getTextArea().read(reader, null);
-		}catch(Exception e){};
-	}
 }

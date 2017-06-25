@@ -9,9 +9,9 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
 public class U2TMenuBar extends JMenuBar {
-	JFrame parent;
+	MainFrame parent;
 	
-	public U2TMenuBar(JFrame parent) {
+	public U2TMenuBar(MainFrame parent) {
 		this.parent = parent;
         ImageIcon iconNew = new ImageIcon("img/png/New document.png");
         ImageIcon iconOpen = new ImageIcon("img/png/Folder.png");
@@ -19,20 +19,27 @@ public class U2TMenuBar extends JMenuBar {
         ImageIcon iconExit = new ImageIcon("img/png/Exit.png");
 
         JMenu fileMenu = new JMenu("File");
+        /* useless */
         JMenu editMenu = new JMenu("Edit");
+        /* useless */
         JMenu toolsMenu = new JMenu("Tools");
+        /* useless */
         JMenu preferencesMenu = new JMenu("Preferences");
+        /* useless */
         JMenu helpMenu = new JMenu("Help");
 
         JMenu impMenu = new JMenu("Import");
 
-        JMenuItem newsfMi = new JMenuItem("Import newsfeed list...");
-        JMenuItem bookmMi = new JMenuItem("Import bookmarks...");
-        JMenuItem mailMi = new JMenuItem("Import mail...");
-
-        impMenu.add(newsfMi);
-        impMenu.add(bookmMi);
-        impMenu.add(mailMi);
+        JMenuItem impUML = new JMenuItem("Import UML diagram (*.xml)...");
+        impUML.addActionListener((ActionEvent event) -> {
+            parent.importUML(event);
+        });
+        JMenuItem impLTL = new JMenuItem("Import LTL patterns...");
+        impLTL.addActionListener((ActionEvent event) -> {
+            parent.importLTL(event);
+        });
+        impMenu.add(impUML);
+        impMenu.add(impLTL);
 
         JMenuItem newMi = new JMenuItem("New", iconNew);
         JMenuItem openMi = new JMenuItem("Open", iconOpen);
