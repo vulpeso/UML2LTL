@@ -24,13 +24,29 @@ public class U2TToolBar extends JToolBar {
         ImageIcon iconGo = new ImageIcon("img/png/Go.png");
         ImageIcon iconProve = new ImageIcon("img/png/OK.png");
 
+        /* unused */
         JButton newb = new JButton(iconNew);
+        /* unused */
         JButton openb = new JButton(iconOpen);
-        openb.addActionListener((ActionEvent event) -> {
-            parent.importUML(event);
-        });
         JButton saveb = new JButton(iconSave);
+        saveb.addActionListener((ActionEvent event) -> {
+            parent.saveLTL(event);
+        });
         JButton gob = new JButton(iconGo);
+        gob.addActionListener((ActionEvent event) -> {
+        	File tmpFileUml = new File("tmp/uml.xml");
+        	File tmpFileReq = new File("tmp/req.txt");
+        	MainFrame.saveToFile(tmpFileUml, parent.modelUML.getTextArea().getText());
+        	MainFrame.saveToFile(tmpFileReq, parent.requirements.getTextArea().getText());
+        	try{
+        		parent.generator.generateLogic("tmp/uml.xml", "tmp/req.txt", "res/conf.xml");
+        		//parent.generator.generateLogic("uml.xml", "ltl.txt", "res/conf.xml");
+        	}catch(Exception e){
+        		parent.debugPane.actionLog("LTL generation failed: Configuration file error\n");
+        		parent.debugPane.debugClear();
+        		parent.debugPane.debugLog("LTL generation failed: Configuration file error\n");
+        	}
+        });
         JButton proveb = new JButton(iconProve);
 
         add(newb);

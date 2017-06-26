@@ -24,7 +24,12 @@ public class TempLogicGenerator {
 		tempLogicPatterns = fileParser.parseFile();
 		logic = patternPart.getLogic(tempLogicPatterns);
 		
-		System.out.println(logic);
+		//System.out.println(logic);
+	}
+	
+	public String getLogic()
+	{
+		return logic;
 	}
 	
 	public boolean saveToFile(String fileName){

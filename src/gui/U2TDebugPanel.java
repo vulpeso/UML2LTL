@@ -15,39 +15,42 @@ public class U2TDebugPanel extends JTabbedPane {
 	private JFrame parent;
 	
 	ScrollableTextArea tReasoning;
-	ScrollableTextArea tReporting;
-	ScrollableTextArea tAnalysis;
 	ScrollableTextArea tDebugging;
+	ScrollableTextArea tActionLog;
 	
 	public U2TDebugPanel(JFrame parent){
 		this.parent = parent;
 		
 		JPanel cReasoning;
-		JPanel cReporting;
-		JPanel cAnalysis;
 		JPanel cDebugging;
+		JPanel cActionLog;
 
 		cReasoning = new JPanel(new BorderLayout());
-		cReporting = new JPanel(new BorderLayout());
-		cAnalysis = new JPanel(new BorderLayout());
 		cDebugging = new JPanel(new BorderLayout());
+		cActionLog = new JPanel(new BorderLayout());
 		
 		tReasoning = new ScrollableTextArea("");
-		tReporting = new ScrollableTextArea("");
-		tAnalysis = new ScrollableTextArea("");
 		tDebugging = new ScrollableTextArea("");
+		tActionLog = new ScrollableTextArea("");
 		
 		cReasoning.add(tReasoning);
-		cReporting.add(tReporting);
-		cAnalysis.add(tAnalysis);
 		cDebugging.add(tDebugging);
+		cActionLog.add(tActionLog);
   
-        addTab("Reasoning", cReasoning);
-        addTab("Reporting", cReporting);
-        addTab("Analysis", cAnalysis);
         addTab("Debugging", cDebugging);
+        addTab("Action Log", cActionLog);
+        addTab("Reasoning", cReasoning);
+	}
+	public void actionLog(String msg){
+		tActionLog.getTextArea().append(msg);
+	}
+	public void debugClear(){
+		tDebugging.getTextArea().setText("");
 	}
 	public void debugLog(String msg){
 		tDebugging.getTextArea().append(msg);
+	}
+	public void reasoningLog(String str){
+		tReasoning.getTextArea().setText(str);
 	}
 }

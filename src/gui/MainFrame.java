@@ -8,6 +8,8 @@ import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -43,10 +45,29 @@ public class MainFrame extends JFrame {
 	//LTL input
 	public ScrollableTextArea requirements;
 	//logic generator output
-	public ScrollableTextArea logicSpec;
+	public ScrollableTextArea ltlResult;
 	public U2TDebugPanel debugPane;
 	public U2TStatusBar statusBar;
 	public U2TGeneratorFacade generator;
+	
+	public static boolean saveToFile(File file, String str){
+		FileWriter out = null;
+		try{
+			out = new FileWriter(file);
+			out.write(str);
+			out.close();
+		}catch(IOException e){
+			try{
+				if(out!=null){
+					out.close();
+				}
+			}catch(Exception ex){}
+				
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	
 	public MainFrame(){
 		ImageIcon webIcon = new ImageIcon("img/icon.png");
@@ -58,11 +79,12 @@ public class MainFrame extends JFrame {
 		toolbar = new U2TToolBar(this);
 		modelUML = new ScrollableTextArea(" input: UML model in XML format");		
 		requirements = new ScrollableTextArea(" input: LTL rules definition");
-		logicSpec = new ScrollableTextArea(" output: Logic specification generator");
+		ltlResult = new ScrollableTextArea(" output: Logic specification generator");
 		debugPane = new U2TDebugPanel(this);
 		statusBar = new U2TStatusBar();
+		generator = new U2TGeneratorFacade(this);
 		
-		createLayout(toolbar, modelUML, requirements, logicSpec, debugPane, statusBar);
+		createLayout(toolbar, modelUML, requirements, ltlResult, debugPane, statusBar);
 		
 		setTitle("UML2LTL");
         setSize(1000, 600);
@@ -98,35 +120,52 @@ public class MainFrame extends JFrame {
         pane.add(pane4, BorderLayout.CENTER);
         pane.add(pane2, BorderLayout.SOUTH);
     }
-	
+    
+    // wczytuje zbiór regu³ LTL dla wzorców
     public void importLTL(ActionEvent e) {
         {
             int returnVal = fc.showOpenDialog(this);
  
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                debugPane.debugLog("import requirements from file: " + file.getName()+"\n");
+                debugPane.actionLog("import requirements from file: " + file.getName()+"\n");
                 loadLTL(file);
             } else {
-            	debugPane.debugLog("Open command cancelled by user.\n");
+            	debugPane.actionLog("Open command cancelled by user.\n");
             }
             //log.setCaretPosition(log.getDocument().getLength());
         }
     }
+    // wczytuje model w formacie xml
     public void importUML(ActionEvent e) {
         {
             int returnVal = fc.showOpenDialog(this);
  
             if (returnVal == JFileChooser.APPROVE_OPTION) {
                 File file = fc.getSelectedFile();
-                debugPane.debugLog("import UML model from file: " + file.getName()+"\n");
+                debugPane.actionLog("import UML model from file: " + file.getName()+"\n");
                 loadUML(file);
             } else {
-            	debugPane.debugLog("Open command cancelled by user.\n");
+            	debugPane.actionLog("Open command cancelled by user.\n");
             }
             //log.setCaretPosition(log.getDocument().getLength());
         }
     }	
+    
+    // zapisuje wygenerowan¹ logikê LTL
+	public void saveLTL(ActionEvent e) {
+        int returnVal = fc.showSaveDialog(this);
+        if (returnVal == JFileChooser.APPROVE_OPTION) {
+            File file = fc.getSelectedFile();
+            String ltl = this.ltlResult.getTextArea().getText();
+			MainFrame.saveToFile(file, ltl);
+			debugPane.actionLog("save generated LTL logc to file: " + file.getName()+"\n");
+        } else {
+        	debugPane.actionLog("Save command cancelled by user.\n");
+        }        
+    }
+	
+    
 	private void loadLTL(File file){
 		try (FileReader reader = new FileReader(file)) {
 		    requirements.getTextArea().read(reader, null);

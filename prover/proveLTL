@@ -1,0 +1,4 @@
+#!/bin/bash
+
+./lout-translate $1 > tmp
+./run-tspass.sh tmp

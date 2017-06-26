@@ -19,14 +19,6 @@ public class U2TMenuBar extends JMenuBar {
         ImageIcon iconExit = new ImageIcon("img/png/Exit.png");
 
         JMenu fileMenu = new JMenu("File");
-        /* useless */
-        JMenu editMenu = new JMenu("Edit");
-        /* useless */
-        JMenu toolsMenu = new JMenu("Tools");
-        /* useless */
-        JMenu preferencesMenu = new JMenu("Preferences");
-        /* useless */
-        JMenu helpMenu = new JMenu("Help");
 
         JMenu impMenu = new JMenu("Import");
 
@@ -41,9 +33,15 @@ public class U2TMenuBar extends JMenuBar {
         impMenu.add(impUML);
         impMenu.add(impLTL);
 
+        /* unused */
         JMenuItem newMi = new JMenuItem("New", iconNew);
+        /* unused */
         JMenuItem openMi = new JMenuItem("Open", iconOpen);
+
         JMenuItem saveMi = new JMenuItem("Save", iconSave);
+        saveMi.addActionListener((ActionEvent event) -> {
+            parent.saveLTL(event);
+        });
 
         JMenuItem exitMi = new JMenuItem("Exit", iconExit);
         exitMi.setToolTipText("Exit application");
@@ -61,10 +59,6 @@ public class U2TMenuBar extends JMenuBar {
         fileMenu.add(exitMi);
 
         add(fileMenu);
-        add(editMenu);
-        add(toolsMenu);
-        add(preferencesMenu);
-        add(helpMenu);
 
     }
 }
