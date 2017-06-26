@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Config>
+	<Nodes>
+		<Seq name="seq" priority="5"/>
+		<SeqSeq name="seqseq" priority="4"/>
+		<Loop name="loop" priority="1"/>
+		<Par name="par" priority="2"/>
+		<Dec name="dec" priority="3"/>
+	</Nodes>
+	<TrueDecisionNames>
+		<DecisionName name="TAK"/>
+		<DecisionName name="TRUE"/>
+		<DecisionName name="YES"/>
+	</TrueDecisionNames>
+</Config>

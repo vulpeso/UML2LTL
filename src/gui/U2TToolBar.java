@@ -22,6 +22,7 @@ public class U2TToolBar extends JToolBar {
         ImageIcon iconOpen = new ImageIcon("img/png/Folder.png");
         ImageIcon iconSave = new ImageIcon("img/png/Save.png");
         ImageIcon iconGo = new ImageIcon("img/png/Go.png");
+        ImageIcon iconProve = new ImageIcon("img/png/OK.png");
 
         JButton newb = new JButton(iconNew);
         JButton openb = new JButton(iconOpen);
@@ -30,12 +31,14 @@ public class U2TToolBar extends JToolBar {
         });
         JButton saveb = new JButton(iconSave);
         JButton gob = new JButton(iconGo);
+        JButton proveb = new JButton(iconProve);
 
         add(newb);
         add(openb);
         add(saveb);
         addSeparator();
         add(gob);
+        add(proveb);
         add(Box.createHorizontalGlue());
     }
 	

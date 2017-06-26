@@ -27,6 +27,8 @@ import javax.swing.JTextArea;
 import javax.swing.JToolBar;
 import javax.swing.LayoutStyle;
 
+import pl.edu.agh.umldiagrams.U2TGeneratorFacade;
+
 
 
 public class MainFrame extends JFrame {
@@ -44,6 +46,7 @@ public class MainFrame extends JFrame {
 	public ScrollableTextArea logicSpec;
 	public U2TDebugPanel debugPane;
 	public U2TStatusBar statusBar;
+	public U2TGeneratorFacade generator;
 	
 	public MainFrame(){
 		ImageIcon webIcon = new ImageIcon("img/icon.png");
@@ -53,9 +56,9 @@ public class MainFrame extends JFrame {
         setJMenuBar(new U2TMenuBar(this));
 		
 		toolbar = new U2TToolBar(this);
-		modelUML = new ScrollableTextArea("UML model in XML format");		
-		requirements = new ScrollableTextArea("LTL rules definition");
-		logicSpec = new ScrollableTextArea("Logic specification generator output");
+		modelUML = new ScrollableTextArea(" input: UML model in XML format");		
+		requirements = new ScrollableTextArea(" input: LTL rules definition");
+		logicSpec = new ScrollableTextArea(" output: Logic specification generator");
 		debugPane = new U2TDebugPanel(this);
 		statusBar = new U2TStatusBar();
 		
