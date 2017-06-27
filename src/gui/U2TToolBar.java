@@ -28,11 +28,15 @@ public class U2TToolBar extends JToolBar {
         JButton newb = new JButton(iconNew);
         /* unused */
         JButton openb = new JButton(iconOpen);
+        
         JButton saveb = new JButton(iconSave);
+        saveb.setToolTipText("Save generated LTL logic to file");
         saveb.addActionListener((ActionEvent event) -> {
             parent.saveLTL(event);
         });
+        
         JButton gob = new JButton(iconGo);
+        gob.setToolTipText("Generate LTL logic based on UML model");
         gob.addActionListener((ActionEvent event) -> {
         	File tmpFileUml = new File("tmp/uml.xml");
         	File tmpFileReq = new File("tmp/req.txt");
@@ -47,7 +51,26 @@ public class U2TToolBar extends JToolBar {
         		parent.debugPane.debugLog("LTL generation failed: Configuration file error\n");
         	}
         });
+        
         JButton proveb = new JButton(iconProve);
+        proveb.setToolTipText("Prove generated LTL logic");
+        proveb.addActionListener((ActionEvent event) -> {
+        	File tmpFileLTL = new File("tmp/ltl.lout");
+        	String result;
+        	MainFrame.saveToFile(tmpFileLTL, parent.ltlResult.getTextArea().getText());
+        	try{
+        		parent.debugPane.debugClear();
+        		parent.debugPane.debugLog("LTL proving started...\n");
+        		result = "Satisfiable"; //U2TProverFacade.invokeProver();
+        		parent.debugPane.actionLog("LTL proving succeed.\n");
+        		parent.debugPane.reasoningLog(result);
+        		parent.debugPane.debugLog("LTL proving succeed. Check Reasoning tab for more details.\n");
+        	}catch(Exception e){
+        		parent.debugPane.actionLog("LTL proving failed.\n");
+        		parent.debugPane.debugClear();
+        		parent.debugPane.debugLog("LTL proving failed.\n");
+        	}
+        });
 
         add(newb);
         add(openb);

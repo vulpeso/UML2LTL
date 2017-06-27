@@ -26,10 +26,12 @@ public class U2TMenuBar extends JMenuBar {
         impUML.addActionListener((ActionEvent event) -> {
             parent.importUML(event);
         });
+        
         JMenuItem impLTL = new JMenuItem("Import LTL patterns...");
         impLTL.addActionListener((ActionEvent event) -> {
             parent.importLTL(event);
         });
+        
         impMenu.add(impUML);
         impMenu.add(impLTL);
 
@@ -39,6 +41,7 @@ public class U2TMenuBar extends JMenuBar {
         JMenuItem openMi = new JMenuItem("Open", iconOpen);
 
         JMenuItem saveMi = new JMenuItem("Save", iconSave);
+        saveMi.setToolTipText("Save generated LTL logic to file");
         saveMi.addActionListener((ActionEvent event) -> {
             parent.saveLTL(event);
         });

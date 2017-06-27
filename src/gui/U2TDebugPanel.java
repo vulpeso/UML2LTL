@@ -33,6 +33,10 @@ public class U2TDebugPanel extends JTabbedPane {
 		tDebugging = new ScrollableTextArea("");
 		tActionLog = new ScrollableTextArea("");
 		
+		tReasoning.disable();
+		tDebugging.disable();
+		tActionLog.disable();
+		
 		cReasoning.add(tReasoning);
 		cDebugging.add(tDebugging);
 		cActionLog.add(tActionLog);

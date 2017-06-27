@@ -1,0 +1,21 @@
+<>Pacjent wybiera kategoriê której dotyczy pytanie / <>Czy pacjent chce dodaæ kolejny za³¹cznik? 
+Pacjent wybiera kategoriê której dotyczy pytanie => <>Czy pacjent chce dodaæ kolejny za³¹cznik?
+Pacjent za³¹cza wybrane za³¹czniki => <>Czy pacjent chce dodaæ kolejny za³¹cznik?
+(Czy pacjent chce dodaæ kolejny za³¹cznik? | Pacjent za³¹cza wybrane za³¹czniki) => ~<>Pacjent wybiera kategoriê której dotyczy pytanie
+
+<>Pacjent wybiera opcjê wysy³ania zapytania dotycz¹cego platformy w module OS / <>System wyœwietla formularz zapytania / <>(Pacjent wybiera kategoriê której dotyczy pytanie | Czy pacjent chce dodaæ kolejny za³¹cznik?)
+Pacjent wybiera opcjê wysy³ania zapytania dotycz¹cego platformy w module OS => <>System wyœwietla formularz zapytania 
+System wyœwietla formularz zapytania => ~<>System wyœwietla formularz zapytania
+System wyœwietla formularz zapytania => <>(Pacjent wybiera kategoriê której dotyczy pytanie | Czy pacjent chce dodaæ kolejny za³¹cznik?) 
+(Pacjent wybiera kategoriê której dotyczy pytanie | Czy pacjent chce dodaæ kolejny za³¹cznik?) => ~<>(Pacjent wybiera kategoriê której dotyczy pytanie | Czy pacjent chce dodaæ kolejny za³¹cznik?)
+
+<>Pacjent wpisuje zapytanie / <>Pacjent przesy³a zapytanie na platformê SWOP / <>Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ
+Pacjent wpisuje zapytanie => <>Pacjent przesy³a zapytanie na platformê SWOP 
+Pacjent przesy³a zapytanie na platformê SWOP => ~<>Pacjent przesy³a zapytanie na platformê SWOP
+Pacjent przesy³a zapytanie na platformê SWOP => <>Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ 
+Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ => ~<>Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ
+
+<>(Pacjent wybiera opcjê wysy³ania zapytania dotycz¹cego platformy w module OS | Czy pacjent chce dodaæ kolejny za³¹cznik?) / <>(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ)
+(Pacjent wybiera opcjê wysy³ania zapytania dotycz¹cego platformy w module OS | Czy pacjent chce dodaæ kolejny za³¹cznik?) => <>(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ) 
+(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ) => ~<>(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytañ oczekuj¹cych na odpowiedŸ)
+

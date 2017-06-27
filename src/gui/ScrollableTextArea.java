@@ -33,6 +33,10 @@ public class ScrollableTextArea extends JPanel {
 		return text;
 	}
 	
+	public void disable(){
+		text.setEditable(false); 
+	}
+	
 	private static JTextArea initTextArea(){
 		JTextArea text = new JTextArea();
 		//text.setPreferredSize(new Dimension(1000,200));  

@@ -6,11 +6,14 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.Arrays;
 
-
+/*
+ * Fasada uruchamia skrypt unixowego shella.
+ *  
+ */
 
 public class U2TProverFacade {
-	String invokeProver(String[] args) throws IOException{
-		Process process = new ProcessBuilder("prover/proveLTL","tmp/out.txt").start();
+	public static String invokeProver() throws IOException{
+		Process process = new ProcessBuilder("prover/proveLTL","tmp/ltl.lout").start();
 		InputStream is = process.getInputStream();
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);
@@ -18,7 +21,6 @@ public class U2TProverFacade {
 		String buffer = "";
 		String newline = "\n";
 	
-		System.out.printf("Output of running %s is:", Arrays.toString(args));
 	
 		while ((line = br.readLine()) != null) {
 		  buffer += line + newline;
