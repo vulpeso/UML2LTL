@@ -1,0 +1,21 @@
+<>Pacjent wybiera kategorię której dotyczy pytanie / <>Czy pacjent chce dodać kolejny załącznik? 
+Pacjent wybiera kategorię której dotyczy pytanie => <>Czy pacjent chce dodać kolejny załącznik?
+Pacjent załącza wybrane załączniki => <>Czy pacjent chce dodać kolejny załącznik?
+(Czy pacjent chce dodać kolejny załącznik? | Pacjent załącza wybrane załączniki) => ~<>Pacjent wybiera kategorię której dotyczy pytanie
+
+<>Pacjent wybiera opcję wysyłania zapytania dotyczącego platformy w module OS / <>System wyświetla formularz zapytania / <>(Pacjent wybiera kategorię której dotyczy pytanie | Czy pacjent chce dodać kolejny załącznik?)
+Pacjent wybiera opcję wysyłania zapytania dotyczącego platformy w module OS => <>System wyświetla formularz zapytania 
+System wyświetla formularz zapytania => ~<>System wyświetla formularz zapytania
+System wyświetla formularz zapytania => <>(Pacjent wybiera kategorię której dotyczy pytanie | Czy pacjent chce dodać kolejny załącznik?) 
+(Pacjent wybiera kategorię której dotyczy pytanie | Czy pacjent chce dodać kolejny załącznik?) => ~<>(Pacjent wybiera kategorię której dotyczy pytanie | Czy pacjent chce dodać kolejny załącznik?)
+
+<>Pacjent wpisuje zapytanie / <>Pacjent przesyła zapytanie na platformę SWOP / <>Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź
+Pacjent wpisuje zapytanie => <>Pacjent przesyła zapytanie na platformę SWOP 
+Pacjent przesyła zapytanie na platformę SWOP => ~<>Pacjent przesyła zapytanie na platformę SWOP
+Pacjent przesyła zapytanie na platformę SWOP => <>Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź 
+Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź => ~<>Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź
+
+<>(Pacjent wybiera opcję wysyłania zapytania dotyczącego platformy w module OS | Czy pacjent chce dodać kolejny załącznik?) / <>(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź)
+(Pacjent wybiera opcję wysyłania zapytania dotyczącego platformy w module OS | Czy pacjent chce dodać kolejny załącznik?) => <>(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź) 
+(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź) => ~<>(Pacjent wpisuje zapytanie | Platforma zapisuje zapytanie w bazie zapytań oczekujących na odpowiedź)
+

@@ -13,7 +13,7 @@ import java.util.Arrays;
 
 public class U2TProverFacade {
 	public static String invokeProver() throws IOException{
-		Process process = new ProcessBuilder("prover/proveLTL","tmp/ltl.lout").start();
+		Process process = new ProcessBuilder("/bin/bash","proveLTL", "ltl.lout").start();
 		InputStream is = process.getInputStream();
 		InputStreamReader isr = new InputStreamReader(is);
 		BufferedReader br = new BufferedReader(isr);

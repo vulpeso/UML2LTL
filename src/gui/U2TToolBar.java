@@ -55,13 +55,14 @@ public class U2TToolBar extends JToolBar {
         JButton proveb = new JButton(iconProve);
         proveb.setToolTipText("Prove generated LTL logic");
         proveb.addActionListener((ActionEvent event) -> {
-        	File tmpFileLTL = new File("tmp/ltl.lout");
+        	File tmpFileLTL = new File("ltl.lout");
         	String result;
         	MainFrame.saveToFile(tmpFileLTL, parent.ltlResult.getTextArea().getText());
         	try{
         		parent.debugPane.debugClear();
         		parent.debugPane.debugLog("LTL proving started...\n");
-        		result = "Satisfiable"; //U2TProverFacade.invokeProver();
+        		//result = "Satisfiable"; 
+        		result = U2TProverFacade.invokeProver();
         		parent.debugPane.actionLog("LTL proving succeed.\n");
         		parent.debugPane.reasoningLog(result);
         		parent.debugPane.debugLog("LTL proving succeed. Check Reasoning tab for more details.\n");
@@ -72,8 +73,8 @@ public class U2TToolBar extends JToolBar {
         	}
         });
 
-        add(newb);
-        add(openb);
+        /*add(newb);
+        add(openb);*/
         add(saveb);
         addSeparator();
         add(gob);

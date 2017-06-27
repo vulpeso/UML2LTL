@@ -53,8 +53,8 @@ public class U2TMenuBar extends JMenuBar {
             System.exit(0);
         });
 
-        fileMenu.add(newMi);
-        fileMenu.add(openMi);
+        /*fileMenu.add(newMi);
+        fileMenu.add(openMi);*/
         fileMenu.add(saveMi);
         fileMenu.addSeparator();
         fileMenu.add(impMenu);
